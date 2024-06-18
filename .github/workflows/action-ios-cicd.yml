@@ -1,9 +1,11 @@
 name: "Build iOS app"
 
 on:
-  # manual trigger but change to any supported event
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
   workflow_dispatch:
-    branches: [main]
 
 jobs:
   build_with_signing:
