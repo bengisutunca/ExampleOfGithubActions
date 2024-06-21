@@ -70,25 +70,3 @@ jobs:
           name: app
           path:  ${{ runner.temp }}/build
           retention-days: 3
-
-        - name: Deploy to TestFlight
-  env:
-    APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
-    APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
-    APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
-    APP_STORE_CONNECT_TEAM_ID: ${{ secrets.APP_STORE_CONNECT_TEAM_ID }}
-  run: |
-    # Debugging output
-    ls -R $RUNNER_TEMP
-
-    # Install altool
-    sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
-    
-    # Create a temporary file for the API key
-    echo "${APP_STORE_CONNECT_API_KEY}" | base64 --decode > AuthKey_${APP_STORE_CONNECT_KEY_ID}.p8
-    
-    # Verify file creation
-    ls -l AuthKey_${APP_STORE_CONNECT_KEY_ID}.p8
-    
-    # Upload IPA to TestFlight
-    xcrun altool --upload-app --type ios --file $RUNNER_TEMP/build/ExampleOfGithubActions.ipa --apiKey ${APP_STORE_CONNECT_KEY_ID} --apiIssuer ${APP_STORE_CONNECT_ISSUER_ID} --apiKeyAuthFile AuthKey_${APP_STORE_CONNECT_KEY_ID}.p8 --verbose
