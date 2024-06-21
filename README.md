@@ -22,6 +22,12 @@ This project utilizes GitHub Actions to automate building and testing the iOS ap
 
 The workflow triggers on every push to the `main` branch, pull requests targeting the `main` branch, and can be manually triggered.
 
+## 📚 Tutorial Followed
+
+For detailed steps and explanations, please refer to Andrew Hoog's tutorial:
+
+[How to Build an iOS App with GitHub Actions](https://www.andrewhoog.com/post/how-to-build-an-ios-app-with-github-actions-2023/)
+
 ## 📝 To-Do for Continuous Deployment (CD)
 
 - **Deploy to TestFlight**: Future plans include adding steps to deploy the iOS application to TestFlight as part of the CI/CD pipeline.
