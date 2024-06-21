@@ -1,3 +1,30 @@
+# iOS Project with GitHub Actions
+
+This repository contains an iOS project that demonstrates the use of GitHub Actions for continuous integration (CI).
+
+## Features
+
+- **iOS Application**: A sample iOS application.
+- **GitHub Actions**: Workflow configuration for CI/CD.
+
+## Getting Started
+
+### Prerequisites
+
+- Xcode 15.1 or later
+- A GitHub account
+
+## GitHub Actions Workflow
+
+This project uses GitHub Actions to automatically build and test the iOS application. The workflow is defined in the `.github/workflows/build-ios-app.yml` file.
+
+### Workflow Configuration
+
+The workflow is triggered on every push to the `main` branch, on pull requests targeting the `main` branch, and can also be manually triggered.
+
+#### `build-ios-app.yml`
+
+```yaml
 name: "Build iOS app"
 
 on:
@@ -70,4 +97,3 @@ jobs:
           name: app
           path:  ${{ runner.temp }}/build
           retention-days: 3
-
