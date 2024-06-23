@@ -70,3 +70,15 @@ jobs:
           name: app
           path:  ${{ runner.temp }}/build
           retention-days: 3
+          
+      - name: Upload to TestFlight
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+        run: |
+          xcrun altool --upload-app \
+                       --type ios \
+                       --file $RUNNER_TEMP/build/ExampleOfGithubActions.ipa \
+                       --username "$APPLE_ID" \
+                       --password "$APPLE_APP_SPECIFIC_PASSWORD" \
+                       --verbose
