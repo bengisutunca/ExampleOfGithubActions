@@ -11,10 +11,10 @@ jobs:
   build_with_signing:
     runs-on: macos-latest
     steps:
-      - name: check Xcode version
+      - name: Check Xcode version
         run: /usr/bin/xcodebuild -version
 
-      - name: checkout repository
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Install the Apple certificate and provisioning profile
@@ -46,7 +46,7 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
-      - name: build archive
+      - name: Build archive
         run: |
           xcodebuild -scheme "ExampleOfGithubActions" \
           -archivePath $RUNNER_TEMP/ExampleOfGithubActions.xcarchive \
@@ -56,7 +56,7 @@ jobs:
           -allowProvisioningUpdates \
           clean archive
 
-      - name: export ipa
+      - name: Export IPA
         env:
           EXPORT_OPTIONS_PLIST: ${{ secrets.EXPORT_OPTIONS_PLIST }}
         run: |
@@ -68,9 +68,9 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: app
-          path:  ${{ runner.temp }}/build
+          path: $RUNNER_TEMP/build
           retention-days: 3
-          
+
       - name: Upload to TestFlight
         env:
           APPLE_ID: ${{ secrets.APPLE_ID }}
